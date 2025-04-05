@@ -17,13 +17,19 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'  # Use latest LTS version of Node
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci  # Use ci instead of install for cleaner installs in CI
+
+      - name: Create .env file
+        run: |
+          echo "NODE_OPTIONS=--no-experimental-fetch" > .env
 
       - name: Build project
         run: npm run build
+        env:
+          NODE_OPTIONS: "--no-experimental-fetch"  # This disables features that might be causing crypto issues
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
