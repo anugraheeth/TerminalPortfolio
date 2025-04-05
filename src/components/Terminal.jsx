@@ -13,6 +13,9 @@ const Terminal = () => {
   const inputRef = useRef(null);
   const terminalEndRef = useRef(null);
   const commandHistoryRef = useRef([]);
+  const [isBooting, setIsBooting] = useState(true);
+  const [bootLines, setBootLines] = useState([]);
+  const hasBootedRef = useRef(false);
 
   const scrollToBottom = () => {
     terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -23,12 +26,69 @@ const Terminal = () => {
   }, [history]);
 
   useEffect(() => {
+    if (!hasBootedRef.current) {
+        hasBootedRef.current = true;
+        setTimeout(simulateBootAnimation, 20);
+      }
     inputRef.current?.focus();
   }, []);
 
   const handleInputChange = (event) => {
     setCurrentCommand(event.target.value);
   };
+
+  function simulateBootAnimation() {
+    const terminal = document.querySelector('.terminal-container');
+    if (!terminal) return;
+  
+    document.body.style.backgroundColor = '#000';
+    terminal.innerHTML = ''; // Clear screen
+  
+    const bootLines = [
+        `██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗`, 
+        `██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗`,
+        `██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║`,
+        `██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║`,
+        `██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝`,
+        `╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ `,
+                                                                       
+                                                                     
+        '[ OK ] Starting Arch Linux...',
+        '[ OK ] Initializing kernel modules...',
+        '[ OK ] Mounting root filesystem...',
+        '[ OK ] Starting udev daemon...',
+        '[ OK ] Loading device manager...',
+        '[ OK ] Starting Network Manager...',
+        '[ OK ] Rebuilding journal...',
+        '[ OK ] Boot complete. Welcome, anugraheeth.',
+        '',
+        `
+        
+        `,
+      ];
+      
+  
+    let index = 0;
+  
+    const interval = setInterval(() => {
+      if (index < bootLines.length) {
+        const line = document.createElement('div');
+        line.textContent = bootLines[index];
+        line.style.color = '#50fa7b'; // terminal green
+        line.style.fontFamily = 'Courier New, monospace';
+        line.style.whiteSpace = 'pre';
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+        index++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+            setIsBooting(false);
+          }, 800);
+      }
+    }, 400); // Delay between lines
+  }
+  
 
   const handleCommandExecution = useCallback((command) => {
     const output = processCommand(command, currentPath, setCurrentPath);
@@ -145,23 +205,36 @@ const Terminal = () => {
       className="terminal-container"
       onClick={handleTerminalClick}
     >
-      <div className="terminal-welcome">Welcome to My Interactive Portfolio! Type 'help' for available commands.</div>
-
-      {history.map((entry) => (
-        <HistoryEntry key={entry.id} entry={entry} />
-      ))}
-
-      <TerminalPrompt 
-        currentPath={currentPath}
-        currentCommand={currentCommand}
-        onInputChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        inputRef={inputRef}
-      />
-      
-      <div ref={terminalEndRef} />
+      {isBooting ? (
+        <>
+          {bootLines.map((line, index) => (
+            <div key={index} style={{ color: '#50fa7b', fontFamily: 'Courier New, monospace' }}>
+              {line}
+            </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <div className="terminal-welcome">Welcome to My Interactive Portfolio! Type 'help' for available commands.</div>
+  
+          {history.map((entry) => (
+            <HistoryEntry key={entry.id} entry={entry} />
+          ))}
+  
+          <TerminalPrompt 
+            currentPath={currentPath}
+            currentCommand={currentCommand}
+            onInputChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            inputRef={inputRef}
+          />
+          
+          <div ref={terminalEndRef} />
+        </>
+      )}
     </div>
   );
+  
 };
 
 export default Terminal;

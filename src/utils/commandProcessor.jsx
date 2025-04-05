@@ -52,18 +52,18 @@ export const processCommand = (command, currentPath, setCurrentPath) => {
         className="text-green-400 whitespace-pre-wrap"
         dangerouslySetInnerHTML={{
           __html: `
-              .--.         <span class="text-blue-400">user@portfolio</span>
-             |o_o |        ------------
+              .--.         <span class="text-blue-400">anugraheeth@portfolio</span>
+             |o_o |        ---------------------
              |:_/ |        <span class="text-white">OS</span>: Web Browser (ReactOS)
-            //   \\\\ \\\\     <span class="text-white">Host</span>: Your Device
+            //   \\\\ \\\\     <span class="text-white">Host</span>: Github Pages
            (|     | )      <span class="text-white">Kernel</span>: JavaScript V8/SpiderMonkey/etc.
           /'\\\\_   _/ \`\\\\   <span class="text-white">Uptime</span>: (session duration)
           \\\\___)=(___/     <span class="text-white">Shell</span>: bash (simulated)
                            <span class="text-white">Resolution</span>: ${window.innerWidth}x${window.innerHeight}
                            <span class="text-white">Terminal</span>: ReactTerm
-                           <span class="text-white">CPU</span>: Your Brain Power
-                           <span class="text-white">GPU</span>: Your Imagination
-                           <span class="text-white">Memory</span>: (browser usage)
+                           <span class="text-white">CPU</span>: Overclocked Neural Network (a.k.a. anugraheeth)
+                           <span class="text-white">GPU</span>: RTX ∞ Series
+                           <span class="text-white">Memory</span>: 26.2 MB
       
                            <span class="text-red-500">██</span><span class="text-green-500">██</span><span class="text-yellow-500">██</span><span class="text-blue-500">██</span><span class="text-purple-500">██</span><span class="text-cyan-500">██</span><span class="text-white">██</span><span class="text-gray-500">██</span>
           `,
@@ -153,9 +153,32 @@ export const processCommand = (command, currentPath, setCurrentPath) => {
       return ''; // No output, just clears the screen
     case 'echo':
       return <span className="text-green-400">{argString}</span>;
-      case '~':
-        setCurrentPath('/home/anugraheeth'); // cd without args goes home
-        return '';
+    case '~':
+      setCurrentPath('/home/anugraheeth'); // cd without args goes home
+      return '';
+    case 'poweroff': {
+      // Simulate a terminal shutdown effect
+      document.body.style.transition = 'background-color 1s ease-in-out';
+      document.body.style.backgroundColor = 'black';
+    
+      const terminal = document.querySelector('.terminal-container');
+      if (terminal) {
+        terminal.innerHTML = `
+          <div style="color: lime; text-align: center; margin-top: 40vh; font-family: 'Courier New', monospace;">
+            Powering off...
+          </div>
+        `;
+      }
+    
+      // Optionally, disable further input (soft lock)
+      const input = document.querySelector('.terminal-input');
+      if (input) {
+        input.disabled = true;
+      }
+    
+      return null;
+    }
+        
     default:
       return <span className="text-red-400">{`bash: command not found: ${cmd}`}</span>;
   }
