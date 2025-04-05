@@ -8,7 +8,7 @@ import '../App.css';
 const Terminal = () => {
   const [history, setHistory] = useState([]);
   const [currentCommand, setCurrentCommand] = useState('');
-  const [currentPath, setCurrentPath] = useState('/home/user');
+  const [currentPath, setCurrentPath] = useState('/home/anugraheeth');
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef(null);
   const terminalEndRef = useRef(null);
@@ -92,7 +92,7 @@ const Terminal = () => {
     const getAbsolutePath = (target) => {
       if (!target) return currentPath;
       if (target.startsWith('/')) return normalizePath(target);
-      if (target === '~') return '/home/user';
+      if (target === '~') return '/home/anugraheeth';
       return resolvePath(currentPath, target);
     };
 
