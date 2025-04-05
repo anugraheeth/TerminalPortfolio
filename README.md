@@ -1,12 +1,53 @@
-# React + Vite
+# 🖥️ TerminalPortfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **terminal-style developer portfolio** built with React.  
+Inspired by the look and feel of a classic Linux terminal, this portfolio offers a nostalgic yet modern way to showcase your work, skills, and personality.
 
-Currently, two official plugins are available:
+🔗 **Live Demo**: [anugraheeth.github.io/TerminalPortfolio](https://anugraheeth.github.io/TerminalPortfolio/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📸 Preview
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+![TerminalPortfolio Screenshot](https://anugraheeth.github.io/TerminalPortfolio/assets/preview.png) <!-- Optional: Replace with your actual screenshot path -->
+
+---
+
+## ✨ Features
+
+- ⚡ Terminal-style UI for a unique retro experience  
+- ⌨️ Fully keyboard-navigable interface  
+- 🎨 Custom command responses and animations  
+- 💻 Fake terminal commands like `about`, `projects`, `contact`, `help`  
+- 🔐 Simulated commands like `sudo`, `poweroff`, `reboot` with custom effects  
+- 📱 Mobile-responsive layout  
+- 🧠 Built using modern React, Hooks, and CSS  
+
+---
+
+## 🛠️ Commands
+
+Try entering these commands on the site:
+
+| Command      | Description                          |
+|--------------|--------------------------------------|
+| `about`      | View bio and brief introduction      |
+| `projects`   | List of featured projects            |
+| `contact`    | Contact information and links        |
+| `help`       | List available commands              |
+| `sudo`       | Try it 😉                             |
+| `poweroff`   | Simulate terminal shutdown           |
+| `reboot`     | Simulate reboot with Arch animation  |
+| `clear`      | Clear terminal history               |
+
+---
+
+## 🚀 Getting Started
+
+To run locally:
+
+```bash
+git clone https://github.com/anugraheeth/TerminalPortfolio.git
+cd TerminalPortfolio
+npm install
+npm start
