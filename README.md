@@ -9,7 +9,7 @@ Inspired by the look and feel of a classic Linux terminal, this portfolio offers
 
 ## 📸 Preview
 
-![TerminalPortfolio Screenshot](https://anugraheeth.github.io/TerminalPortfolio/assets/preview.png) <!-- Optional: Replace with your actual screenshot path -->
+![TerminalPortfolio Screenshot](https://github.com/anugraheeth/TerminalPortfolio/blob/main/src/assets/preview.png) <!-- Optional: Replace with your actual screenshot path -->
 
 ---
 
